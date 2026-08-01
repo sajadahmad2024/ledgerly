@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules
+
+# Build output
+dist
+build
+coverage
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# NestJS
+backend/dist
+backend/node_modules
+
+# Next.js (Future Frontend)
+frontend/.next
+frontend/out
+frontend/node_modules
+
+# Turbo (Future)
+.turbo
+
+# Misc
+*.swp
+*.swo
