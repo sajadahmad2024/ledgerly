@@ -30,3 +30,9 @@
 - **Reason**: Provides clean, declarative route protection (`@UseGuards(JwtAuthGuard)`) and type-safe user extraction without manually accessing Express request objects in controllers. Protects against User Enumeration attacks by standardizing auth error messages.
 - **Status**: Accepted
 
+## ADR-007: User-Scoped Data Isolation & Soft Archiving
+- **Decision**: Require `userId` in all repository queries (`where: and(eq(table.userId, userId), ...)`), and use `isArchived = true` boolean flags for accounts instead of hard SQL `DELETE`.
+- **Reason**: Eliminates Insecure Direct Object Reference (IDOR) vulnerabilities by ensuring users can never read, update, or archive records belonging to other tenants. Soft archiving preserves historical transaction records for financial audit integrity.
+- **Status**: Accepted
+
+

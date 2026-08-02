@@ -21,11 +21,12 @@
 - [x] Protected Route Guard (`JwtAuthGuard`) & `@CurrentUser()` Decorator
 - [x] `POST /auth/register`, `POST /auth/login`, `GET /auth/me`
 
-## Phase 3: Accounts Feature Module (In Progress)
-- [ ] `AccountsRepository` (User-scoped queries)
-- [ ] `CreateAccountDto` & `UpdateAccountDto`
-- [ ] `AccountsService` (Create, List, Update, Soft Archive)
-- [ ] `AccountsController` (REST API Endpoints)
+## Phase 3: Accounts Feature Module
+- [x] `AccountsRepository` (User-scoped queries & IDOR protection)
+- [x] `CreateAccountDto` & `UpdateAccountDto` with `class-validator`
+- [x] `AccountsService` (Create, List, Update, Soft Archive)
+- [x] `AccountsController` (REST API Endpoints guarded by `JwtAuthGuard` and `ParseUUIDPipe`)
+
 
 ## Phase 4: Categories & System Defaults
 - [ ] System Categories vs Custom User Categories Logic
