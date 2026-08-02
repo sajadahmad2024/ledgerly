@@ -40,5 +40,11 @@
 - **Reason**: Eliminates table duplication, allows global default categories out-of-the-box for all users while granting individual users the ability to create custom categories. Prevents users from mutating or deleting system default categories.
 - **Status**: Accepted
 
+## ADR-009: Virtual Computed Account Balances
+- **Decision**: Calculate account balances dynamically using PostgreSQL `SUM(CASE WHEN type = 'INCOME' THEN amount ELSE 0 END) - SUM(...)` aggregates instead of storing a mutable `balance` column on the `accounts` table.
+- **Reason**: Permanently eliminates data drift, desynchronization, and race conditions between transaction records and account balances. Guarantees 100% audit integrity when transactions are created, edited, backdated, or deleted.
+- **Status**: Accepted
+
+
 
 

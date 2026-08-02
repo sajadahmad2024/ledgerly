@@ -36,9 +36,11 @@
 
 
 ## Phase 5: Transactions & Balance Aggregation
-- [ ] Income & Expense Transactions CRUD
-- [ ] Dynamic Virtual Balance Calculation
-- [ ] Database Transactions (ACID Atomicity)
+- [x] `TransactionsRepository` (User-scoped queries & SQL virtual balance aggregation)
+- [x] `CreateTransactionDto` & `UpdateTransactionDto` validation
+- [x] `TransactionsService` (Foreign key verification & virtual balance query)
+- [x] `TransactionsController` (REST API Endpoints)
+
 
 ## Phase 6: Reports & Financial Analytics
 - [ ] Income vs Expense Aggregation Queries
