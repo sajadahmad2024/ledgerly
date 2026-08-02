@@ -6,6 +6,7 @@ import {
   Delete,
   Body,
   Param,
+  Query,
   UseGuards,
   ParseUUIDPipe,
 } from '@nestjs/common';
@@ -17,6 +18,7 @@ import {
 } from '@nestjs/swagger';
 import { TransactionsService } from './transactions.service';
 import { CreateTransactionDto, UpdateTransactionDto } from './dto';
+import { PaginationQueryDto } from '../common/dto/pagination-query.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
@@ -49,16 +51,19 @@ export class TransactionsController {
   }
 
   @ApiOperation({
-    summary: 'Get all transactions for authenticated user',
+    summary: 'Get paginated list of transactions for authenticated user',
   })
-  @ApiResponse({ status: 200, description: 'List of transactions' })
+  @ApiResponse({ status: 200, description: 'Paginated transactions list' })
   @Get()
-  async findAll(@CurrentUser('id') userId: string) {
-    const transactionsList =
-      await this.transactionsService.findAllTransactions(userId);
+  async findAll(
+    @CurrentUser('id') userId: string,
+    @Query() query: PaginationQueryDto,
+  ) {
+    const paginatedResult =
+      await this.transactionsService.findAllTransactions(userId, query);
     return {
       success: true,
-      data: transactionsList,
+      data: paginatedResult,
     };
   }
 

@@ -3,6 +3,8 @@ import { TransactionsRepository } from './transactions.repository';
 import { AccountsRepository } from '../accounts/accounts.repository';
 import { CategoriesRepository } from '../categories/categories.repository';
 import { CreateTransactionDto, UpdateTransactionDto } from './dto';
+import { PaginationQueryDto, PaginatedResult } from '../common/dto/pagination-query.dto';
+import { Transaction } from './transactions.repository';
 
 @Injectable()
 export class TransactionsService {
@@ -49,8 +51,31 @@ export class TransactionsService {
     });
   }
 
-  async findAllTransactions(userId: string) {
-    return await this.transactionsRepository.findByUserId(userId);
+  async findAllTransactions(
+    userId: string,
+    query: PaginationQueryDto,
+  ): Promise<PaginatedResult<Transaction>> {
+    const page = query.page ?? 1;
+    const limit = query.limit ?? 10;
+
+    const { items, total } = await this.transactionsRepository.findByUserId(
+      userId,
+      page,
+      limit,
+    );
+
+    const totalPages = Math.ceil(total / limit) || 1;
+
+    return {
+      items,
+      meta: {
+        totalItems: total,
+        itemCount: items.length,
+        itemsPerPage: limit,
+        totalPages,
+        currentPage: page,
+      },
+    };
   }
 
   async findTransactionById(id: string, userId: string) {

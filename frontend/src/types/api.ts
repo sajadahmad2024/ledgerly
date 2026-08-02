@@ -14,6 +14,19 @@ export interface ApiErrorResponse {
   timestamp: string;
 }
 
+export interface PaginationMeta {
+  totalItems: number;
+  itemCount: number;
+  itemsPerPage: number;
+  totalPages: number;
+  currentPage: number;
+}
+
+export interface PaginatedResult<T> {
+  items: T[];
+  meta: PaginationMeta;
+}
+
 export interface User {
   id: string;
   name: string;

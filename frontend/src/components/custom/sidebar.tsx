@@ -67,7 +67,6 @@ export function Sidebar() {
                   ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20 shadow-sm'
                   : 'text-zinc-400 hover:bg-zinc-800/40 hover:text-zinc-200',
               )}
-
             >
               <Icon
                 className={cn(

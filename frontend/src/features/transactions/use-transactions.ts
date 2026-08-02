@@ -2,17 +2,20 @@
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiClient } from '@/lib/api-client';
-import { Transaction } from '@/types/api';
+import { Transaction, PaginatedResult } from '@/types/api';
 import { ACCOUNTS_QUERY_KEY } from '../accounts/use-accounts';
 
 export const TRANSACTIONS_QUERY_KEY = ['transactions'] as const;
 
-export function useTransactions() {
+export function useTransactions(page = 1, limit = 10) {
   const queryClient = useQueryClient();
 
   const query = useQuery({
-    queryKey: TRANSACTIONS_QUERY_KEY,
-    queryFn: () => apiClient<Transaction[]>('/transactions'),
+    queryKey: [...TRANSACTIONS_QUERY_KEY, page, limit],
+    queryFn: () =>
+      apiClient<PaginatedResult<Transaction>>(
+        `/transactions?page=${page}&limit=${limit}`,
+      ),
   });
 
   const createMutation = useMutation({
@@ -46,7 +49,15 @@ export function useTransactions() {
     },
   });
 
-  const transactions = query.data || [];
+  const transactions = query.data?.items || [];
+  const meta = query.data?.meta || {
+    totalItems: 0,
+    itemCount: 0,
+    itemsPerPage: limit,
+    totalPages: 1,
+    currentPage: page,
+  };
+
   const totalIncome = transactions
     .filter((t) => t.type === 'INCOME')
     .reduce((sum, t) => sum + parseFloat(t.amount), 0);
@@ -60,6 +71,7 @@ export function useTransactions() {
   return {
     ...query,
     transactions,
+    meta,
     totalIncome,
     totalExpense,
     totalBalance,

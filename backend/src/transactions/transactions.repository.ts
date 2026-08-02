@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { eq, and, sql } from 'drizzle-orm';
+import { eq, and, sql, desc } from 'drizzle-orm';
 import { DRIZZLE } from '../db/db.constants';
 import { type Database } from '../db/db.module';
 import { transactions } from '../db/schema';
@@ -19,10 +19,29 @@ export class TransactionsRepository {
     return newTransaction;
   }
 
-  async findByUserId(userId: string): Promise<Transaction[]> {
-    return await this.db.query.transactions.findMany({
+  async findByUserId(
+    userId: string,
+    page = 1,
+    limit = 10,
+  ): Promise<{ items: Transaction[]; total: number }> {
+    const offset = (page - 1) * limit;
+
+    const items = await this.db.query.transactions.findMany({
       where: eq(transactions.userId, userId),
+      orderBy: [desc(transactions.transactionDate), desc(transactions.createdAt)],
+      limit,
+      offset,
     });
+
+    const [countResult] = await this.db
+      .select({ count: sql<number>`CAST(COUNT(*) AS INTEGER)` })
+      .from(transactions)
+      .where(eq(transactions.userId, userId));
+
+    return {
+      items,
+      total: countResult?.count || 0,
+    };
   }
 
   async findById(id: string, userId: string): Promise<Transaction | null> {
