@@ -59,13 +59,7 @@ ledgerly/
 
 ## 📚 Documentation
 
-Project documentation is available in the `docs` directory.
-
-- Requirements
-- Architecture
-- Database Design
-- API Design
-- Roadmap
+Project documentation is available in the [`docs`](./docs) directory — see [`docs/README.md`](./docs/README.md) for the full index (vision, architecture, conventions, database design, API design, decisions, roadmap, features, engineering log, learning notes).
 
 ---
 
