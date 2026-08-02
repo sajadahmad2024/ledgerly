@@ -2,36 +2,40 @@
 
 - [x] Setup
 
-- [x] Drizzle
+# Ledgerly Product & Engineering Roadmap
 
-- [ ] Database Connection
+## Phase 1: Core Infrastructure & Setup
+- [x] Fail-Fast Environment Validation (`@nestjs/config` + Zod)
+- [x] Custom Global `DatabaseModule` with Drizzle ORM
+- [x] PostgreSQL Schema Definitions (`users`, `accounts`, `categories`, `transactions`)
+- [x] Drizzle Migration Workflow (`drizzle-kit generate` & `migrate`)
+- [x] Repository Pattern Foundation (`UsersRepository`)
+- [x] Global Exception Filter & Standardized API Response Envelope
+- [x] OpenAPI Swagger UI Integration (`/api`)
 
-- [ ] Migration
+## Phase 2: User Authentication & Security Module
+- [x] Password Hashing with `bcrypt`
+- [x] `RegisterDto` & `LoginDto` validation with `class-validator`
+- [x] `AuthService` (Registration, Authentication, Token Generation)
+- [x] JWT Strategy & Passport Integration
+- [x] Protected Route Guard (`JwtAuthGuard`) & `@CurrentUser()` Decorator
+- [x] `POST /auth/register`, `POST /auth/login`, `GET /auth/me`
 
-- [ ] Auth
+## Phase 3: Accounts Feature Module (In Progress)
+- [ ] `AccountsRepository` (User-scoped queries)
+- [ ] `CreateAccountDto` & `UpdateAccountDto`
+- [ ] `AccountsService` (Create, List, Update, Soft Archive)
+- [ ] `AccountsController` (REST API Endpoints)
 
-# Phase 2
+## Phase 4: Categories & System Defaults
+- [ ] System Categories vs Custom User Categories Logic
+- [ ] `CategoriesModule` CRUD
 
-Users
+## Phase 5: Transactions & Balance Aggregation
+- [ ] Income & Expense Transactions CRUD
+- [ ] Dynamic Virtual Balance Calculation
+- [ ] Database Transactions (ACID Atomicity)
 
-Accounts
-
-Categories
-
-Transactions
-
-# Phase 3
-
-Budgets
-
-Dashboard
-
-Reports
-
-# Phase 4
-
-Recurring Transactions
-
-Notifications
-
-AI Insights
+## Phase 6: Reports & Financial Analytics
+- [ ] Income vs Expense Aggregation Queries
+- [ ] Category Breakdown Analytics
