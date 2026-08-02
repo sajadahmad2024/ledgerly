@@ -29,8 +29,11 @@
 
 
 ## Phase 4: Categories & System Defaults
-- [ ] System Categories vs Custom User Categories Logic
-- [ ] `CategoriesModule` CRUD
+- [x] Dual retrieval query logic (`userId IS NULL OR userId = currentUser`)
+- [x] `CreateCategoryDto` & `UpdateCategoryDto` validation
+- [x] `CategoriesService` (System category modification protection)
+- [x] `CategoriesController` (REST API Endpoints)
+
 
 ## Phase 5: Transactions & Balance Aggregation
 - [ ] Income & Expense Transactions CRUD

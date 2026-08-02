@@ -13,14 +13,19 @@
 - **Auth Feature Module**: `bcrypt` hashing, JWT issuance & Passport `JwtStrategy`, `@CurrentUser()` decorator, and Swagger UI at `/api`.
 
 ## Session 3: Accounts Feature Module & User Data Isolation
+- **`AccountsRepository`**: User-scoped query filtering (`userId`).
+- **`AccountsService` & `AccountsController`**: Account creation, listing, updating, and soft-archiving (`isArchived = true`).
+
+## Session 4: Categories Feature Module & System Protection
 
 ### Completed
-- **`AccountsRepository`**: Created user-scoped repository methods (`create`, `findByUserId`, `findById`, `update`) enforcing multi-tenant data isolation (`where: and(eq(accounts.userId, userId), ...)`).
-- **`CreateAccountDto` & `UpdateAccountDto`**: Integrated `class-validator` rules, `AccountType` enum (`CASH`, `BANK`, `CREDIT_CARD`, `WALLET`), and Swagger `@ApiProperty()` tags.
-- **`AccountsService`**: Implemented account creation, listing, updating, and soft-archiving logic (`isArchived = true`).
-- **`AccountsController`**: Created protected REST endpoints (`POST /accounts`, `GET /accounts`, `GET /accounts/:id`, `PATCH /accounts/:id`, `DELETE /accounts/:id`) guarded by `JwtAuthGuard` and `ParseUUIDPipe`.
+- **`CategoriesRepository`**: Dual-query retrieval logic (`or(isNull(categories.userId), eq(categories.userId, userId))`) combining system default categories with custom user categories.
+- **`CreateCategoryDto` & `UpdateCategoryDto`**: Validation for category types (`INCOME`, `EXPENSE`), icons, and hex color codes.
+- **`CategoriesService` System Protection**: Enforced `ForbiddenException` blocking attempts to modify or delete system default categories (`userId = null`).
+- **`CategoriesController`**: Protected REST API endpoints (`POST /categories`, `GET /categories`, `GET /categories/:id`, `PATCH /categories/:id`, `DELETE /categories/:id`).
 
 ### Next Session
-- Implement **Categories Module** (System Default Categories vs Custom User Categories).
+- Implement **Transactions Module** & Virtual Balance Aggregation.
+
 
 

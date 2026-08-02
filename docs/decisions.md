@@ -35,4 +35,10 @@
 - **Reason**: Eliminates Insecure Direct Object Reference (IDOR) vulnerabilities by ensuring users can never read, update, or archive records belonging to other tenants. Soft archiving preserves historical transaction records for financial audit integrity.
 - **Status**: Accepted
 
+## ADR-008: Hybrid System & Custom Categories Architecture
+- **Decision**: Store both System Default Categories (`userId = NULL`, `isDefault = true`) and Custom User Categories (`userId = <user_uuid>`) in a single `categories` table, guarded by service-level immutability checks (`ForbiddenException`).
+- **Reason**: Eliminates table duplication, allows global default categories out-of-the-box for all users while granting individual users the ability to create custom categories. Prevents users from mutating or deleting system default categories.
+- **Status**: Accepted
+
+
 
