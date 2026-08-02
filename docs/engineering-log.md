@@ -28,8 +28,21 @@
 - **`TransactionsService`**: Cross-module foreign key verification (`AccountsRepository`, `CategoriesRepository`) and virtual balance calculation.
 - **`TransactionsController`**: Protected REST API endpoints (`POST /transactions`, `GET /transactions`, `GET /transactions/balance/:accountId`, `GET /transactions/:id`, `PATCH /transactions/:id`, `DELETE /transactions/:id`).
 
+## Session 6: Database Seeding & Next.js 16 Frontend Implementation
+
+### Completed
+- **Idempotent Database Seed Script**: Created `src/db/seed.ts` inserting 12 system default income and expense categories idempotently. Added `"db:seed"` command to package.json.
+- **Next.js 16 App Router Frontend**: Scaffolded `frontend/` using Next.js 16, TypeScript 5.9, Tailwind CSS v4, Lucide React, Zod, and React Hook Form.
+- **`zetld` TanStack Query Architecture**:
+  - Registered global `defaultError: ApiError` via TypeScript declaration merging in `src/lib/query-client.ts`.
+  - Created modular feature hooks (`useCurrentUser`, `useAuthMutations`, `useAccounts`, `useCategories`, `useTransactions`).
+- **Dark Theme UI & Smooth Left Sidebar**: Linear/Stripe style minimal dark theme (`#09090B` background, emerald accents) with a fixed left sidebar (`src/components/sidebar.tsx`), flicker-free tab transitions, and hydration safety guards.
+- **Full REST API Integration**: Integrated Auth (`/login`, `/register`), Dashboard overview, Accounts grid, Categories list, and Transactions table with NestJS backend.
+- **NestJS CORS Enablement**: Enabled CORS origin `http://localhost:3002` in `backend/src/main.ts`.
+
 ### Next Steps
-- **Phase 6**: Financial Reports & Analytics Endpoints (Income vs Expense aggregations, Category breakdown).
+- **Financial Reports & Analytics Module**: Implement backend `ReportsModule` for monthly trends and category expense breakdown pie chart.
+
 
 
 

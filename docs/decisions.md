@@ -45,6 +45,12 @@
 - **Reason**: Permanently eliminates data drift, desynchronization, and race conditions between transaction records and account balances. Guarantees 100% audit integrity when transactions are created, edited, backdated, or deleted.
 - **Status**: Accepted
 
+## ADR-010: Next.js 16 App Router & `zetld` TanStack Query Feature Hook Architecture
+- **Decision**: Build `frontend/` using Next.js 16 App Router, TypeScript 5.9, Tailwind CSS v4, dark theme design tokens (`#09090B`), and adopt `zetld`'s TanStack Query feature hook pattern.
+- **Reason**: Decouples UI pages from API fetching logic, provides global TypeScript error declaration merging (`defaultError: ApiError`), guarantees automatic query cache invalidations, and delivers a butter-smooth fixed sidebar navigation experience without route flickering.
+- **Status**: Accepted
+
+
 
 
 
